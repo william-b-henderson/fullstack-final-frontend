@@ -34,7 +34,7 @@ function Occasions(props) {
     }, [title]);
 
     return(
-        <Link to="/restaurant"> 
+        <Link to={`/${title}/restaurants`}> 
             <Flex 
                     w="20vw" 
                     h="30vh" 

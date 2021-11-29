@@ -19,7 +19,7 @@ function App() {
                     <Route index element={<SignIn />} />
                     <Route path="signup" element={<SignUp />} />
                     <Route path="occasions" element={<Occasions />} />
-                    <Route path="restaurants" element={<Restaurants />}>
+                    <Route path=":occasion/restaurants" element={<Restaurants />}>
                       <Route path=":restaurantId" element={<Restaurant />} />
                     </Route>
                     <Route path="*" element={
