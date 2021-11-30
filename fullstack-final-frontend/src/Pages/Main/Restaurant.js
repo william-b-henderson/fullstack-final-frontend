@@ -7,12 +7,15 @@ import { Box,
     Input,
     Button,
      } from "@chakra-ui/react";
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import MenuPreview from '../../PageComponents/Occasions/Restaurant/MenuPreview';
 
 function Restaurant() {
 
     const params = useParams();
+    let [searchParams, setSearchParams] = useSearchParams();
+
+    const restaurantId = searchParams.get("restaurantid" || "");
 
     return (
         <>    
@@ -25,7 +28,7 @@ function Restaurant() {
                 justify="center"
                 align="center"
                 >
-                <Text color="">Restaurant #{params.restaurantId}</Text>
+                <Text color="">Restaurant #{restaurantId}</Text>
             </Flex>
             <Flex
                 w="50%"

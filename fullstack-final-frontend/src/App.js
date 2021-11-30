@@ -19,9 +19,7 @@ function App() {
                     <Route index element={<SignIn />} />
                     <Route path="signup" element={<SignUp />} />
                     <Route path="occasions" element={<Occasions />} />
-                    <Route path=":occasion/restaurants" element={<Restaurants />}>
-                      <Route path=":restaurantId" element={<Restaurant />} />
-                    </Route>
+                    <Route path="restaurants" element={<Restaurants />} />
                     <Route path="*" element={
                       <main style={{ padding: "1rem" }}>
                       <p style={{color: "black"}}>ERROR 404: Page Not Found</p>

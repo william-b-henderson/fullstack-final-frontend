@@ -12,29 +12,17 @@ import { FaHeart, FaUser, FaUserFriends } from "react-icons/fa";
 import { BsFillBriefcaseFill } from "react-icons/bs";
 import { BiRun } from "react-icons/bi"
 import {useMemo } from 'react';
+import OccasionIcon from '../../Components/OccasionIcon';
+import { useSearchParams } from 'react-router-dom';
+
 
 
 function Occasions(props) {
     const title = props.title;
     const color = props.color;
 
-    const icon = useMemo(() => {
-        switch(title) {
-            case "Date":
-                return <FaHeart size="x" />
-            case "Work":
-                return <BsFillBriefcaseFill size="x" />
-            case "Friends":
-                return <FaUserFriends size="x" />
-            case "Quick Bite":
-                return <BiRun size="x" />
-            default:
-                return <BsFillBriefcaseFill size="x" />
-        }
-    }, [title]);
-
     return(
-        <Link to={`/${title}/restaurants`}> 
+        <Link to={`/restaurants?occasion=${title.toLowerCase()}&restaurantid=1`}> 
             <Flex 
                     w="20vw" 
                     h="30vh" 
@@ -50,7 +38,9 @@ function Occasions(props) {
                         outline: "solid red",
                     }}
                     >
-                    <Box w="100%" h="90%" color={color} >{icon}</Box>
+                    <Box w="100%" h="90%" color={color} >
+                        <OccasionIcon title={title} />
+                    </Box>
                     <Text color="black">{title}</Text>
             </Flex>
         </Link>
