@@ -12,10 +12,13 @@ import MenuPreview from './MenuPreview';
 
 function Restaurant() {
 
-    const params = useParams();
     let [searchParams, setSearchParams] = useSearchParams();
 
     const restaurantId = searchParams.get("restaurantid" || "");
+
+    if (restaurantId) {
+        //const restaurantPayload = fetch();
+    }
 
     return (
         <>    
