@@ -12,7 +12,9 @@ import { Link, Outlet, useParams, useSearchParams } from 'react-router-dom';
 import { ImArrowRight2 } from 'react-icons/im';
 import { ImArrowLeft2 } from 'react-icons/im';
 import OccasionIcon from '../../Components/OccasionIcon';
-import Restaurant from './Restaurant';
+import Restaurant from '../../PageComponents/Occasions/Restaurant/Restaurant';
+import NavBar from '../../Components/NavBar';
+import RestaurantWrapper from '../../Components/RestaurantWrapper';
 
 function Restaurants() {
 
@@ -27,6 +29,7 @@ function Restaurants() {
 
     return (
         <>
+            <NavBar />
             <Link to={`/restaurants?occasion=${occasion}&restaurantid=${previousRestaurant(restaurantId)}`}>
                 <Button
                     w="70px"
@@ -60,21 +63,11 @@ function Restaurants() {
                     >
                     <OccasionIcon title={searchParams.get("occasion")} />
                 </Box>
-                <Flex 
-                    w="50vw" 
-                    h="70vh" 
-                    bgColor="white" 
-                    borderRadius="xl"
-                    boxShadow="2xl"
-                    wrap="wrap"
-                    direction="row"
-                    justify="flex-start"
-                    align="flex-start"
-                >
+                <RestaurantWrapper>
                     <Restaurant />
-                </Flex>
+                </RestaurantWrapper>
                 <Link to="/occasions">
-                    <Button colorScheme="blue">Change Occasion</Button>
+                    <Button colorScheme="blue" mt="10px">Change Occasion</Button>
                 </Link>
             </Flex>
             <Link to={`/restaurants?occasion=${occasion}&restaurantid=${nextRestaurant(restaurantId)}`}>

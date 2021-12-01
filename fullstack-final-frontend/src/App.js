@@ -5,8 +5,8 @@ import Splash from './Pages/Auth/Splash';
 import SignUp from "./Pages/Auth/SignUp";
 import SignIn from "./Pages/Auth/SignIn";
 import Occasions from "./Pages/Main/Occasions";
-import Restaurants from "./Pages/Main/Restaurants"
-import Restaurant from "./Pages/Main/Restaurant"
+import Restaurants from "./Pages/Main/Restaurants";
+import Favorites from "./Pages/Main/Favorites";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
@@ -16,10 +16,13 @@ function App() {
        <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Splash />} >
-                    <Route index element={<SignIn />} />
-                    <Route path="signup" element={<SignUp />} />
+                    {/* <Route index element={<Auth />}> */}
+                      <Route index element={<SignIn />} />
+                      <Route path="signup" element={<SignUp />} />
+                    {/* </Route> */}
                     <Route path="occasions" element={<Occasions />} />
                     <Route path="restaurants" element={<Restaurants />} />
+                    <Route path="favorites" element={<Favorites />} />
                     <Route path="*" element={
                       <main style={{ padding: "1rem" }}>
                       <p style={{color: "black"}}>ERROR 404: Page Not Found</p>

@@ -8,7 +8,7 @@ import { Box,
     Button,
      } from "@chakra-ui/react";
 import { useParams, useSearchParams } from 'react-router-dom';
-import MenuPreview from '../../PageComponents/Occasions/Restaurant/MenuPreview';
+import MenuPreview from './MenuPreview';
 
 function Restaurant() {
 
