@@ -2,7 +2,6 @@ import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from './theme';
 import Splash from './Pages/Auth/Splash';
-import SignUp from "./Pages/Auth/SignUp";
 import SignIn from "./Pages/Auth/SignIn";
 import Occasions from "./Pages/Main/Occasions";
 import Restaurants from "./Pages/Main/Restaurants";
@@ -17,7 +16,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Splash />} >
                       <Route index element={<SignIn />} />
-                      <Route path="signup" element={<SignUp />} />
+                      <Route path="signup" element={<SignIn variant="Sign Up" />} />
                     <Route path="occasions" element={<Occasions />} />
                     <Route path="restaurants" element={<Restaurants />} />
                     <Route path="favorites" element={<Favorites />} />

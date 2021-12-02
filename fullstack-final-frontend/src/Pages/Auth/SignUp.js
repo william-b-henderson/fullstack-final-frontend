@@ -8,6 +8,7 @@ import {
     Button,
     } from "@chakra-ui/react";
  import { Link } from 'react-router-dom';
+import LoginForm from '../../Components/LoginForm';
 
 function SignUp() {
 
@@ -29,47 +30,7 @@ function SignUp() {
             <Text fontSize="sm" color="gray.400" py="15" px="10%" textAlign="center">
                 Please enter your email and password to log in!
             </Text>
-            <FormControl mt="15%" px="10%" color="black" align="center">
-                <Input 
-                    color="black"
-                    placeholder="Email"
-                    _placeholder={{ color: "gray.500" }}
-                    type="email"
-                    variant="outline" 
-                    size="sm" 
-                    borderColor="red"
-                    isRequired/>
-                <Input 
-                    color="black"
-                    placeholder="Password"
-                    _placeholder={{ color: "gray.500" }}
-                    type="password"
-                    variant="outline" 
-                    size="sm" 
-                    mt="10%"
-                    mb="5%"
-                    borderColor="red"
-                    isRequired/>
-                <Text color="gray.500" fontSize="xs" mb="20%">
-                    Already have an account?
-                    <Link to="/">{" "}Sign In</Link>
-                </Text>
-                <Link to="/occasions">
-                    <Button 
-                        w="50%" 
-                        color="white" 
-                        bgColor="red"
-                        _hover={{
-                            color: "red",
-                            bgColor: "white",
-                            border: "solid red",
-                        }}
-                        >
-                        Login
-                    </Button>
-                </Link>
-                
-            </FormControl>
+            <LoginForm variant="Sign Up" />;
         </Flex>
     );
 }

@@ -1,15 +1,10 @@
 import React from 'react';
-import {
-    Flex,
-    Heading,
-    Text,
-    FormControl,
-    Input,
-    Button,
-    } from "@chakra-ui/react";
-import { Link } from 'react-router-dom';
+import { Flex, Heading, Text } from "@chakra-ui/react";
+import LoginForm from '../../Components/LoginForm';
 
-function SignIn() {
+function SignIn(props) {
+
+    const variant = props.variant || "Login";
 
     return (
         <Flex 
@@ -24,52 +19,12 @@ function SignIn() {
             align="center"
             > 
             <Heading size="xl" color="black" pt="80px">
-                Login
+                {variant}
             </Heading>
             <Text fontSize="sm" color="gray.400" py="15" px="10%" textAlign="center">
-                Please enter your email and password to log in!
+                Please enter your email and password to {variant.toLowerCase()}!
             </Text>
-            <FormControl mt="15%" px="10%" color="black" align="center">
-                <Input 
-                    color="black"
-                    placeholder="Email"
-                    _placeholder={{ color: "gray.500" }}
-                    type="email"
-                    variant="outline" 
-                    size="sm" 
-                    borderColor="red"
-                    isRequired/>
-                <Input 
-                    color="black"
-                    placeholder="Password"
-                    _placeholder={{ color: "gray.500" }}
-                    type="password"
-                    variant="outline" 
-                    size="sm" 
-                    mt="10%"
-                    mb="5%"
-                    borderColor="red"
-                    isRequired/>
-                <Text color="gray.500" fontSize="xs" mb="20%">
-                    Don't have an account? 
-                    <Link to="/signup">{" "}Sign Up</Link>
-                </Text>
-                <Link to="/occasions">
-                    <Button 
-                        w="50%" 
-                        color="white" 
-                        bgColor="red"
-                        
-                        _hover={{
-                            color: "red",
-                            bgColor: "white",
-                            border: "solid red",
-                        }}
-                        >
-                        Login
-                    </Button>
-                </Link>
-            </FormControl>
+            <LoginForm variant={variant} />
         </Flex>
     );
 }
