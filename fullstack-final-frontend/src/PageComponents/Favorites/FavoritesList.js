@@ -106,9 +106,6 @@ function FavoritesList() {
         return
     })
 
-    // console.log('ID: ' + restaurantId);
-    
-
     return (
         <Box 
             position="fixed" 
