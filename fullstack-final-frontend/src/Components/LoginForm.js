@@ -15,7 +15,7 @@ function LoginForm(props) {
         opposite = "Sign Up"
         link = "signup";
     }
-    
+
 
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -29,28 +29,29 @@ function LoginForm(props) {
         }
 
         if (variant === "Login") {
-            axios.post("https://localhost:8080/login", { payload })
+            const login = "http://localhost:8080/user/login"
+            axios.post(login, { payload })
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
+                    navigate("/occasions");
                 })
                 .catch((error) => {
                     console.error(error);
-                    return;
                 });
         }
         else {
-            axios.post("https://localhost:8080//signup", { payload })
+            axios.post("http://localhost:8080/user/signup", { payload })
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
+                    navigate("/occasions");
                 })
                 .catch((error) => {
                     console.error(error);
-                    return;
                 });;
         }
-        navigate("/occasions");
+        
     }
 
 

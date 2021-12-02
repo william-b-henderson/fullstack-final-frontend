@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { 
     Box,
@@ -7,10 +7,11 @@ import {
     } from "@chakra-ui/react";
 import FavoritesListItem from './FavoritesListItem';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import axios from 'axios';
 
 function FavoritesList() {
 
-    const favoritesList = [
+    const defaultfavoritesList = [
         {
             name: "Abe's Pizza",
             restaurantid: 1,
@@ -93,6 +94,27 @@ function FavoritesList() {
         }, 
     ]
 
+    let userid = "123";
+    let [favoritesList, setFavoritesList] = useState(defaultfavoritesList);
+    let [user, setUser] = useState();
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/user/me", { id: userid })
+            .then((res) => {
+                setUser(res);
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+        axios.get("http://localhost:8080/occasion/getFavoritesList", { user })
+            .then((res) => {
+                setFavoritesList(res);
+            })
+    },[user, userid]);
+
+
+    
+
     let [searchParams] = useSearchParams();
     const navigate = useNavigate();
    
@@ -103,7 +125,7 @@ function FavoritesList() {
             const firstFavoriteId = favoritesList[0].restaurantid;
             navigate(`?restaurantid=${firstFavoriteId}`);
         }
-        return
+        return;
     })
 
     return (

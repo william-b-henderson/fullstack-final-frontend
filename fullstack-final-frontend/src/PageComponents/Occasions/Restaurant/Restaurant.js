@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
-    Box,
+    // Box,
     Flex,
-    Text,
+    // Text,
     Button,
     Heading,
     Image,
@@ -12,13 +12,40 @@ import { useSearchParams } from 'react-router-dom';
 import MenuPreview from './MenuPreview';
 import RestaurantTag from './RestaurantTag';
 import Rating from "./Rating";
+import axios from 'axios';
 
 function Restaurant() {
 
     let [searchParams] = useSearchParams();
     const restaurantId = searchParams.get("restaurantid" || "");
-    const exampleRestaurantDescription = "This is a beautiful restaurant settled into the nice neighborhood of the financial district in San Francisco. Here you can enjoy a tasty french menu, along with an accompaning menu for your delightful dog. Please enjoy! "
+    const exampleId = "WavvLdfdP6g8aZTtbBQHTw";
     const imageurl = "https://s3-media0.fl.yelpcdn.com/bphoto/vmH4W-1mWGhLPNQPne21Rg/l.jpg";
+    const defaultRestaurant = {
+        name: "Restaurant Name",
+        id: exampleId,
+        image_url: imageurl,
+        url: "https://www.yelp.com",
+        rating: 4,
+        price: "$$",
+        categories: ["Outdoor Seating", "French", "Dog-Friendly"],
+        transactions: "",
+        phone: "",
+    }
+    let [restaurant, setRestaurant] = useState(defaultRestaurant);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/getRestaurantDetails", { exampleId }) //CHANGE TO RESTAURANTID
+            .then(res => {
+                setRestaurant(res);
+            })
+            .catch((error => {
+                console.error(error);
+            }))
+    });
+    
+
+    // const exampleRestaurantDescription = "This is a beautiful restaurant settled into the nice neighborhood of the financial district in San Francisco. Here you can enjoy a tasty french menu, along with an accompaning menu for your delightful dog. Please enjoy! "
+    
 
     if (restaurantId) {
         //const restaurantPayload = fetch();
@@ -35,45 +62,48 @@ function Restaurant() {
                 justify="center"
                 align="center"
                 >
-                <Image src={imageurl} boxSize="100%" borderRadius="xl" fit="cover" />
-                {/* <Text color="">Restaurant #{restaurantId}</Text> */}
+                <Image src={restaurant.image_url} boxSize="100%" borderRadius="xl" fit="cover" />
             </Flex>
             <Flex
                 w="50%"
                 h="50%"
                 direction="column"
                 borderRadius="xl"
-                justify="space-around"
+                justify="center"
                 align="center"
             >
-                <Heading color="black" fontSize="4xl" align="center" fontFamily="palantino">Restaurant Name</Heading>
-                <Flex direction="row" w="102" h="18">
-                    <Rating title="4" />
+                <Heading color="black" fontSize="4xl" align="center" fontFamily="palantino">{restaurant.name}</Heading>
+                <Flex direction="row" w="102" h="18" marginY="10px">
+                    <Rating title={restaurant.rating} />
                 </Flex>
                 <Flex w="85%" h="20%" justify="center" align="center" wrap="wrap" overflowY="scroll">
-                    <RestaurantTag title="Outdoor Dining" />
-                    <RestaurantTag title="French" />
-                    <RestaurantTag title="Spicy" />
-                    <RestaurantTag title="Dog Friendly" />
-                    <RestaurantTag title="Takout" />
+                    <RestaurantTag title={restaurant.price} />
+                    {restaurant.categories.map((category) => {
+                        return <RestaurantTag title={category} />
+                    })}
                 </Flex>
-                <Box w="100%" h="25%" px="2%" overflowY="scroll">
+                {/* <Box w="100%" h="25%" px="2%" overflowY="scroll">
                     <Text color="black" >{exampleRestaurantDescription}</Text>
-                </Box>
+                </Box> */}
                 <Flex 
                     w="100%" 
-                    h="20%"  
+                    h="20%"
+                    paddingTop="40px"
                     justify="space-around"
                     align="center"
                     >
-                    <Button variant="red" >Directions</Button>
-                    <Button variant="red" >Add to Favorites</Button> 
+                    {/* <Button variant="red" >Directions</Button> */}
+                    <Button size="lg" variant="red" >Add to Favorites</Button> 
                     <a 
-                        href="https://www.yelp.com" 
+                        href={restaurant.url} 
                         target="_blank" 
-                        rel="noreferrer">
+                        rel="noreferrer"
+                        >
                         <IconButton 
-                        icon={<Image maxH="80%" src="yelp/yelp_logo.svg" />} />
+                        icon={<Image maxH="100%" src="yelp/yelp_logo.svg" />}
+                        _hover={{
+                            outline: "solid red"
+                        }} />
                     </a>
                 </Flex>
             </Flex>
