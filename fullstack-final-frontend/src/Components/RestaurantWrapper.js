@@ -1,12 +1,5 @@
 import React from 'react';
-import { Box,
-    Flex,
-    Heading,
-    Text,
-    FormControl,
-    Input,
-    Button,
-     } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 function RestaurantWrapper(props) {
     const { children, ...rest } = props
@@ -15,6 +8,7 @@ function RestaurantWrapper(props) {
                 <Flex 
                     w="50vw" 
                     h="70vh" 
+                    minW="800px"
                     bgColor="white" 
                     borderRadius="xl"
                     boxShadow="2xl"

@@ -13,6 +13,27 @@ const theme = extendTheme({
         bgGradient: "linear(to-t, red.300, white)"
       },
     },
+    Button: {
+      variants: {
+        red: {
+          bg: "red",
+          color: "white",
+          fontWeight: "bold",
+          _hover: {
+            bg: "#e0000f",
+          }
+        },
+        white: {
+          bg: "white",
+          color: "black",
+          fontWeight: "bold",
+          _hover: {
+            bg: "black",
+            color: "white"
+          }
+        }
+      }
+    }
   },
 })
 

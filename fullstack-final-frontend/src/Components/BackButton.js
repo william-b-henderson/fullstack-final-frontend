@@ -11,10 +11,11 @@ function BackButton(props) {
     if (location.state !== null) {
         backLink = (location.state.pathname + location.state.search);
     }
+
     return (
             <Link to={backLink}>
                 <Button 
-                    colorScheme="red" 
+                    variant="red" 
                     position="fixed" 
                     mx="10px" 
                     my="10px"
@@ -25,7 +26,6 @@ function BackButton(props) {
                 </Button>
             </Link>
     );
-    
 }
 
 export default BackButton;

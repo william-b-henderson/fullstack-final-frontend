@@ -16,10 +16,8 @@ function App() {
        <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Splash />} >
-                    {/* <Route index element={<Auth />}> */}
                       <Route index element={<SignIn />} />
                       <Route path="signup" element={<SignUp />} />
-                    {/* </Route> */}
                     <Route path="occasions" element={<Occasions />} />
                     <Route path="restaurants" element={<Restaurants />} />
                     <Route path="favorites" element={<Favorites />} />

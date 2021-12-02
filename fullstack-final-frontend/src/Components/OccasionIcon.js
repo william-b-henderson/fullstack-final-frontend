@@ -4,10 +4,8 @@ import { BsFillBriefcaseFill } from "react-icons/bs";
 import { BiRun } from "react-icons/bi"
 import {useMemo } from 'react';
 
-
 function OccasionIcon(props) {
     const title = props.title.toLowerCase();
-
 
     const icon = useMemo(() => {
         switch(title) {

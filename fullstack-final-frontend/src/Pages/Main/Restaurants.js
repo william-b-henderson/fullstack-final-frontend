@@ -1,14 +1,10 @@
 import React from 'react';
-import { Box,
+import { 
+    Box,
     Flex,
-    
-    Heading,
-    Text,
-    FormControl,
-    Input,
     Button,
-     } from "@chakra-ui/react";
-import { Link, Outlet, useParams, useSearchParams } from 'react-router-dom';
+    } from "@chakra-ui/react";
+import { Link, useSearchParams } from 'react-router-dom';
 import { ImArrowRight2 } from 'react-icons/im';
 import { ImArrowLeft2 } from 'react-icons/im';
 import OccasionIcon from '../../Components/OccasionIcon';
@@ -18,9 +14,7 @@ import RestaurantWrapper from '../../Components/RestaurantWrapper';
 
 function Restaurants() {
 
-    const params = useParams();
-    let [searchParams, setSearchParams] = useSearchParams();
-
+    let [searchParams] = useSearchParams();
     const restaurantId = searchParams.get("restaurantid" || "");
     const occasion = searchParams.get("occasion" || "");
 
@@ -50,7 +44,7 @@ function Restaurants() {
             <Flex
                 w="50vw"
                 h="90vh"
-                // bgColor="gray.200"
+                minW="800px"
                 direction="column"
                 justify="center"
                 align="center"
@@ -58,32 +52,24 @@ function Restaurants() {
                 <Box
                     w="10vw"
                     h="10vh"
-                    // align="center"
-                    // justify="center"
-                    >
+                >
                     <OccasionIcon title={searchParams.get("occasion")} />
                 </Box>
                 <RestaurantWrapper>
                     <Restaurant />
                 </RestaurantWrapper>
                 <Link to="/occasions">
-                    <Button colorScheme="blue" mt="10px">Change Occasion</Button>
+                    <Button variant="white" mt="10px">Change Occasion</Button>
                 </Link>
             </Flex>
             <Link to={`/restaurants?occasion=${occasion}&restaurantid=${nextRestaurant(restaurantId)}`}>
                 <Button
                     w="70px"
                     h="70px"
-                    borderRadius="full"
+                    variant="white"
                     ml="10px"
-                    bgColor="white"
-                    color="black"
+                    borderRadius="full"
                     boxShadow="xl"
-                    _hover={{
-                        bgColor: "black",
-                        color: "white"
-                    }}
-
                 >
                     < ImArrowRight2 size="x" />
                 </Button>

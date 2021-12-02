@@ -1,16 +1,15 @@
 import React from 'react';
-import { Box,
-Flex,
-Heading,
-Text,
-FormControl,
-Input,
-Button,
- } from "@chakra-ui/react";
- import { Link, useNavigate } from 'react-router-dom';
+import {
+    Flex,
+    Heading,
+    Text,
+    FormControl,
+    Input,
+    Button,
+    } from "@chakra-ui/react";
+ import { Link } from 'react-router-dom';
 
 function SignUp() {
-    const navigate = useNavigate();
 
     return (
         <Flex 

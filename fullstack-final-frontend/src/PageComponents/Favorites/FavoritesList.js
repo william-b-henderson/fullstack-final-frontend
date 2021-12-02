@@ -1,16 +1,14 @@
 import React from 'react';
-import { Box,
+import { useEffect } from 'react';
+import { 
+    Box,
     Flex,
-    Heading,
-    Text,
-    FormControl,
-    Input,
-    Button,
-     } from "@chakra-ui/react";
-import { Link, useLocation } from 'react-router-dom';
+    Heading
+    } from "@chakra-ui/react";
 import FavoritesListItem from './FavoritesListItem';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-function FavoritesList(props) {
+function FavoritesList() {
 
     const favoritesList = [
         {
@@ -92,9 +90,24 @@ function FavoritesList(props) {
         {
             name: "Waterbar",
             restaurantid: 20,
-        },
-        
+        }, 
     ]
+
+    let [searchParams] = useSearchParams();
+    const navigate = useNavigate();
+   
+
+    useEffect(() => {
+        const restaurantId = searchParams.get("restaurantid" || "");
+        if (restaurantId === null) {
+            const firstFavoriteId = favoritesList[0].restaurantid;
+            navigate(`?restaurantid=${firstFavoriteId}`);
+        }
+        return
+    })
+
+    // console.log('ID: ' + restaurantId);
+    
 
     return (
         <Box 

@@ -1,12 +1,5 @@
 import React from 'react';
-import { Box,
-    Flex,
-    Heading,
-    Text,
-    FormControl,
-    Input,
-    Button,
-     } from "@chakra-ui/react";
+import { Flex, Button } from "@chakra-ui/react";
 import { Link, useLocation } from 'react-router-dom';
 
 function FavoritesListItem(props) {
@@ -25,9 +18,9 @@ function FavoritesListItem(props) {
                 _hover={{color: "white", bgColor: "black"}}
                 _focus={{textDecoration: "underline", color: "white", bgColor: "black"}}
                 >
-            <Flex w="15vw" h="2.5rem" justify="center" align="center">   
-                    {name} #{restaurantid}
-            </Flex>
+                <Flex w="15vw" h="2.5rem" justify="center" align="center">   
+                        {name} #{restaurantid}
+                </Flex>
             </Button>
         </Link>
         

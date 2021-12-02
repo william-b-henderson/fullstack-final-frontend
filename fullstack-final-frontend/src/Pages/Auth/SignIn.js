@@ -1,12 +1,12 @@
 import React from 'react';
-import { Box,
+import {
     Flex,
     Heading,
     Text,
     FormControl,
     Input,
     Button,
-     } from "@chakra-ui/react";
+    } from "@chakra-ui/react";
 import { Link } from 'react-router-dom';
 
 function SignIn() {

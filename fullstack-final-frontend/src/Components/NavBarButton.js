@@ -8,10 +8,11 @@ function NavBarButton(props) {
     const right = props.right || "";
     const left = props.left || "";
     const location = useLocation();
+
     return (
             <Link to={`/${nav}`} state={location}>
                 <Button 
-                    colorScheme="red" 
+                    variant="red"
                     position="fixed" 
                     mx="10px" 
                     my="10px"
@@ -22,7 +23,6 @@ function NavBarButton(props) {
                 </Button>
             </Link>
     );
-    
 }
 
 export default NavBarButton;

@@ -1,25 +1,24 @@
 import React from 'react';
-import { Box,
-    Flex,
-    Heading,
-    Text,
-    FormControl,
-    Input,
-    Button,
-     } from "@chakra-ui/react";
-import { useNavigate } from 'react-router-dom';
+import { Flex, Text, Image } from "@chakra-ui/react";
 
 function MenuPreview(props) {
-    const image = props.image;
+    const imageurl = props.image || "4-2-food-png.png";
     const description = props.description;
     const price = props.price;
 
     return (
-        <Flex w="25%" h="75%" bgColor="gray.400" direction="column" align="center">
-            <Flex w="100%" h="85%" bgColor="gray.500">
-                <Text>{image}</Text>
+        <Flex 
+            w="25%" 
+            h="75%" 
+            border="1px solid black" 
+            direction="column" 
+            align="center"
+            borderRadius="xl"
+            >
+            <Flex w="100%" h="85%" borderRadius="xl" justify="center">
+                <Image src={imageurl} alt="Food Image"/>
             </Flex>     
-            <Text color="black">{description} - ${price}</Text>                               
+            <Text fontWeight="semibold" color="black">{description} - ${price}</Text>                               
         </Flex>
     )
 }

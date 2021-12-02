@@ -1,19 +1,10 @@
 import React from 'react';
 import { Box,
     Flex,
-    Heading,
     Text,
-    FormControl,
-    Input,
-    Button,
-     } from "@chakra-ui/react";
+    } from "@chakra-ui/react";
 import { Link } from 'react-router-dom';
-import { FaHeart, FaUser, FaUserFriends } from "react-icons/fa";
-import { BsFillBriefcaseFill } from "react-icons/bs";
-import { BiRun } from "react-icons/bi"
-import {useMemo } from 'react';
 import OccasionIcon from '../../Components/OccasionIcon';
-import { useSearchParams } from 'react-router-dom';
 
 
 
@@ -22,7 +13,7 @@ function Occasions(props) {
     const color = props.color;
 
     return(
-        <Link to={`/restaurants?occasion=${title.toLowerCase()}&restaurantid=1`}> 
+        <Link to={`/restaurants?occasion=${title.toLowerCase()}&restaurantid=1`}>
             <Flex 
                     w="20vw" 
                     h="30vh" 
