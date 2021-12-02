@@ -15,6 +15,7 @@ function LoginForm(props) {
         opposite = "Sign Up"
         link = "signup";
     }
+    
 
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
