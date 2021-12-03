@@ -142,7 +142,7 @@ function FavoritesList() {
                 align="flex-start" 
                 w="100%" 
                 h="100%" 
-                bgColor="gray.400"
+                bgColor="rgba(10, 10, 10, .1)"
                 >
                 <Flex 
                     w="15vw" 

@@ -7,7 +7,7 @@ function RestaurantWrapper(props) {
     return (
                 <Flex 
                     w="50vw" 
-                    h="70vh" 
+                    h="35vh" 
                     minW="800px"
                     bgColor="white" 
                     borderRadius="xl"

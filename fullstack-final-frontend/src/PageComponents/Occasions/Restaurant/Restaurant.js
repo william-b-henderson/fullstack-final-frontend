@@ -86,7 +86,7 @@ function Restaurant() {
         <>    
             <Flex 
                 w="50%" 
-                h="50%" 
+                h="100%" 
                 bgColor="black" 
                 borderRadius="xl"
                 direction="column"
@@ -97,7 +97,7 @@ function Restaurant() {
             </Flex>
             <Flex
                 w="50%"
-                h="50%"
+                h="100%"
                 direction="column"
                 borderRadius="xl"
                 justify="center"
@@ -138,11 +138,6 @@ function Restaurant() {
                         }} />
                     </a>
                 </Flex>
-            </Flex>
-            <Flex direction="row" w="100%" h="50%" justify="space-evenly" align="center">
-                <MenuPreview image="" description="A Delicious Porkchop" price = "15" />
-                <MenuPreview image="" description="A Tasty Burger" price = "8" />
-                <MenuPreview image="" description="A Juicy Steak" price = "24" />
             </Flex>
         </>
     )};
