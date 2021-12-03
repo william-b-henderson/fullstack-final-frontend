@@ -23,10 +23,14 @@ function LoginForm(props) {
     const handleChangePassword = (event) => setPassword(event.target.value);
     const handleChangeEmail = (event) => setEmail(event.target.value);
     const handleSubmit = () => {
-    const payload = {
+    const payloadSignin = {
             email: email,
             password: password,
         }
+    const payloadSignup = {
+        email: email,
+        password: password
+    }
     const headers = {
             'Content-Type': 'application/json'
           }
@@ -34,7 +38,7 @@ function LoginForm(props) {
         if (variant === "Login") {
             const url = process.env.API_URL + "/user/login";
             const login = "https://occasionally-final-project.herokuapp.com/user/login"
-            axios.post(login, payload, {
+            axios.post(login, payloadSignin, {
                 headers: headers
             })
                 .then(res => {
@@ -47,8 +51,8 @@ function LoginForm(props) {
         }
         else {
             const url = process.env.API_URL + "/user/signup";
-            const signup = "https://occasionally-final-project.herokuapp.com/user/signup"
-            axios.post(signup, payload, {
+            const signup = "https://occasionally-final-project.herokuapp.com/user/signup";
+            axios.post(signup, payloadSignup, {
                 headers: headers
             })
                 .then(res => {
