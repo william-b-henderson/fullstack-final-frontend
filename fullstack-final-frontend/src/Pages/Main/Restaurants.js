@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { 
     Box,
     Flex,
@@ -15,16 +16,40 @@ import RestaurantWrapper from '../../Components/RestaurantWrapper';
 function Restaurants() {
 
     let [searchParams] = useSearchParams();
+    let [nextRestaurantId, setNextRestaurantId] = useState("");
+    const token = searchParams.get("token" || "");
     const restaurantId = searchParams.get("restaurantid" || "");
     const occasion = searchParams.get("occasion" || "");
 
-    function nextRestaurant(restaurantId) { return parseInt(restaurantId) + 1 };
-    function previousRestaurant(restaurantId) { return parseInt(restaurantId) - 1 };
+    function nextRestaurant(restaurantId) { return nextRestaurantId };
+    function previousRestaurant(restaurantId) { return nextRestaurantId };
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'token': token
+        }
+
+    useEffect(() => {
+        axios.post("https://occasionally-final-project.herokuapp.com/occasion/getRestaurantBasedOnOccasion",
+        {occasion: occasion},
+        {
+            headers: headers
+        })
+        .then(res => {
+        console.log(res);
+        setNextRestaurantId(res.data.id);
+        })
+        .catch((error => {
+            console.error(error);
+        }))
+    }, [restaurantId]);
+    
+
 
     return (
         <>
             <NavBar />
-            <Link to={`/restaurants?occasion=${occasion}&restaurantid=${previousRestaurant(restaurantId)}`}>
+            <Link to={`/restaurants?occasion=${occasion}&restaurantid=${previousRestaurant(restaurantId)}&token=${token}`}>
                 <Button
                     w="70px"
                     h="70px"
@@ -58,11 +83,11 @@ function Restaurants() {
                 <RestaurantWrapper>
                     <Restaurant />
                 </RestaurantWrapper>
-                <Link to="/occasions">
+                <Link to={`/occasions?token=${token}`}>
                     <Button variant="white" mt="10px">Change Occasion</Button>
                 </Link>
             </Flex>
-            <Link to={`/restaurants?occasion=${occasion}&restaurantid=${nextRestaurant(restaurantId)}`}>
+            <Link to={`/restaurants?occasion=${occasion}&restaurantid=${nextRestaurant(restaurantId)}&token=${token}`}>
                 <Button
                     w="70px"
                     h="70px"

@@ -9,7 +9,7 @@ import OccasionIcon from '../../Components/OccasionIcon';
 
 
 
-function Occasions(props) {
+function Occasion(props) {
     const title = props.title;
     const color = props.color;
     let [searchParams] = useSearchParams();
@@ -64,4 +64,4 @@ function Occasions(props) {
     );
 }
 
-export default Occasions;
+export default Occasion;
