@@ -94,39 +94,38 @@ function FavoritesList() {
         }, 
     ]
 
-    let userid = "123";
-    let [favoritesList, setFavoritesList] = useState(defaultfavoritesList);
+    let [favoritesList, setFavoritesList] = useState([]);
     let [user, setUser] = useState();
+    let [firstFavoriteRestaurantId, setFirstFavoriteRestaurantId] = useState("");
+    let [searchParams] = useSearchParams();
+    const restaurantId = searchParams.get("restaurantid" || "");
+    const token = searchParams.get("token" || "");
+    const headers = {
+        'Content-Type': 'application/json',
+        'token': token
+        }
 
     useEffect(() => {
-        axios.get("http://localhost:8080/user/me", { id: userid })
+        axios.post("https://occasionally-final-project.herokuapp.com/occasion/getFavoritesList",
+        {}, 
+        {
+            headers: headers
+         })
             .then((res) => {
-                setUser(res);
+                setFavoritesList(res.data);
+                setFirstFavoriteRestaurantId(favoritesList[0]);
             })
-            .catch((error) => {
-                console.error(error);
-            })
-        axios.get("http://localhost:8080/occasion/getFavoritesList", { user })
-            .then((res) => {
-                setFavoritesList(res);
-            })
-    },[user, userid]);
+    },[]);
 
-
-    
-
-    let [searchParams] = useSearchParams();
     const navigate = useNavigate();
    
 
     useEffect(() => {
         const restaurantId = searchParams.get("restaurantid" || "");
         if (restaurantId === null) {
-            const firstFavoriteId = favoritesList[0].restaurantid;
-            navigate(`?restaurantid=${firstFavoriteId}`);
+            // navigate(`?restaurantid=${firstFavoriteRestaurantId}&token=${token}`);
         }
-        return;
-    })
+    });
 
     return (
         <Box 
@@ -158,7 +157,7 @@ function FavoritesList() {
                     </Heading>
                 </Flex>
                 {favoritesList.map((a) => (
-                    <FavoritesListItem {...a} />
+                    <FavoritesListItem restaurantid={a} />
                 ))}
             </Flex>
         </Box>

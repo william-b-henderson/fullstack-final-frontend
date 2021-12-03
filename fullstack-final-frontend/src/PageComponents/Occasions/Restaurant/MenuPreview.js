@@ -15,10 +15,10 @@ function MenuPreview(props) {
             align="center"
             borderRadius="xl"
             >
-            <Flex w="100%" h="85%" borderRadius="xl" justify="center">
+            <Flex w="100%" h="100%" borderRadius="xl" justify="center">
                 <Image src={imageurl} alt="Food Image"/>
             </Flex>     
-            <Text fontWeight="semibold" color="black">{description} - ${price}</Text>                               
+            {/* <Text fontWeight="semibold" color="black">{description} - ${price}</Text>                                */}
         </Flex>
     )
 }

@@ -1,19 +1,17 @@
 import React from 'react';
 import { Button } from "@chakra-ui/react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 function BackButton(props) {
     const title = props.title;
     const right = props.right || "";
     const left = props.left || "";
-    const location = useLocation();
-    let backLink = "/occasions";
-    if (location.state !== null) {
-        backLink = (location.state.pathname + location.state.search);
-    }
+
+    let [searchParams] = useSearchParams();
+    const token = searchParams.get("token" || "");
 
     return (
-            <Link to={backLink}>
+            <Link to={`/occasions?token=${token}`}>
                 <Button 
                     variant="red" 
                     position="fixed" 

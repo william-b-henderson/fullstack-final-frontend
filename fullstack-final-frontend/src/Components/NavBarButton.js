@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Button } from "@chakra-ui/react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 function NavBarButton(props) {
     const nav = props.to;
@@ -8,9 +9,27 @@ function NavBarButton(props) {
     const right = props.right || "";
     const left = props.left || "";
     const location = useLocation();
+    let [searchParams] = useSearchParams();
+    let [firstFavoriteRestaurantId, setFirstFavoriteRestaurantId] = useState("");
+    const token = searchParams.get("token" || "");
+    const headers = {
+        'Content-Type': 'application/json',
+        'token': token
+        }
+
+    useEffect(() => {
+        axios.post("https://occasionally-final-project.herokuapp.com/occasion/getFavoritesList",
+        {}, 
+        {
+            headers: headers
+         })
+            .then((res) => {
+                setFirstFavoriteRestaurantId(res.data[0]);
+            })
+    },[]);
 
     return (
-            <Link to={`/${nav}`} state={location}>
+            <Link to={`/${nav}?restaurantid=${firstFavoriteRestaurantId}&token=${token}`} state={location}>
                 <Button 
                     variant="red"
                     position="fixed" 

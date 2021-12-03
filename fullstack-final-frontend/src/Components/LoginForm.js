@@ -23,29 +23,37 @@ function LoginForm(props) {
     const handleChangePassword = (event) => setPassword(event.target.value);
     const handleChangeEmail = (event) => setEmail(event.target.value);
     const handleSubmit = () => {
-        const payload = {
+    const payload = {
             email: email,
-            password: password
+            password: password,
         }
+    const headers = {
+            'Content-Type': 'application/json'
+          }
 
         if (variant === "Login") {
-            const login = "http://localhost:8080/user/login"
-            axios.post(login, { payload })
+            const url = process.env.API_URL + "/user/login";
+            const login = "https://occasionally-final-project.herokuapp.com/user/login"
+            axios.post(login, payload, {
+                headers: headers
+            })
                 .then(res => {
                     console.log(res);
-                    console.log(res.data);
-                    navigate("/occasions");
+                    navigate(`/occasions?token=${res.data.token}`);
                 })
                 .catch((error) => {
                     console.error(error);
                 });
         }
         else {
-            axios.post("http://localhost:8080/user/signup", { payload })
+            const url = process.env.API_URL + "/user/signup";
+            const signup = "https://occasionally-final-project.herokuapp.com/user/signup"
+            axios.post(signup, payload, {
+                headers: headers
+            })
                 .then(res => {
                     console.log(res);
-                    console.log(res.data);
-                    navigate("/occasions");
+                    navigate(`/occasions?token=${res.data.token}`);
                 })
                 .catch((error) => {
                     console.error(error);

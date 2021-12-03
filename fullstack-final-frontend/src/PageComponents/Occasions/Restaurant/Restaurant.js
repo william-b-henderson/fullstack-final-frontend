@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { 
     // Box,
     Flex,
@@ -18,6 +18,7 @@ function Restaurant() {
 
     let [searchParams] = useSearchParams();
     const restaurantId = searchParams.get("restaurantid" || "");
+    const token = searchParams.get("token" || "");
     const exampleId = "WavvLdfdP6g8aZTtbBQHTw";
     const imageurl = "https://s3-media0.fl.yelpcdn.com/bphoto/vmH4W-1mWGhLPNQPne21Rg/l.jpg";
     const defaultRestaurant = {
@@ -30,26 +31,56 @@ function Restaurant() {
         categories: ["Outdoor Seating", "French", "Dog-Friendly"],
         transactions: "",
         phone: "",
+        photos: ["https://s3-media0.fl.yelpcdn.com/bphoto/vmH4W-1mWGhLPNQPne21Rg/l.jpg", 
+                "https://s3-media0.fl.yelpcdn.com/bphoto/vmH4W-1mWGhLPNQPne21Rg/l.jpg", 
+                "https://s3-media0.fl.yelpcdn.com/bphoto/vmH4W-1mWGhLPNQPne21Rg/l.jpg"]
     }
     let [restaurant, setRestaurant] = useState(defaultRestaurant);
 
+    
+    const headers = {
+        'Content-Type': 'application/json',
+        'token': token
+        }
+
     useEffect(() => {
-        axios.get("http://localhost:8080/getRestaurantDetails", { exampleId }) //CHANGE TO RESTAURANTID
-            .then(res => {
-                setRestaurant(res);
-            })
-            .catch((error => {
-                console.error(error);
-            }))
-    });
+        axios.post("https://occasionally-final-project.herokuapp.com/occasion/getRestaurantDetails",
+        {id: restaurantId},
+        {
+            headers: headers
+        })
+        .then(res => {
+        console.log(res);
+        setRestaurant(res.data);
+        })
+        .catch((error => {
+            console.error(error);
+        }))
+    }, [restaurantId]);
+    
+    console.log(restaurant);
+
+    const handleAddToFavorites = () => {
+        axios.post("https://occasionally-final-project.herokuapp.com/occasion/addToFavorites",
+        {restaurant: restaurantId},
+        {
+            headers: headers
+        })
+        .then(res => {
+        console.log(res);
+        })
+        .catch((error => {
+            console.error(error);
+        }))
+    }
+    
+
+    
+    
     
 
     // const exampleRestaurantDescription = "This is a beautiful restaurant settled into the nice neighborhood of the financial district in San Francisco. Here you can enjoy a tasty french menu, along with an accompaning menu for your delightful dog. Please enjoy! "
-    
 
-    if (restaurantId) {
-        //const restaurantPayload = fetch();
-    }
 
     return (
         <>    
@@ -62,7 +93,7 @@ function Restaurant() {
                 justify="center"
                 align="center"
                 >
-                <Image src={restaurant.image_url} boxSize="100%" borderRadius="xl" fit="cover" />
+                <Image src={restaurant.image_url || ""} boxSize="100%" borderRadius="xl" fit="cover" />
             </Flex>
             <Flex
                 w="50%"
@@ -78,9 +109,10 @@ function Restaurant() {
                 </Flex>
                 <Flex w="85%" h="20%" justify="center" align="center" wrap="wrap" overflowY="scroll">
                     <RestaurantTag title={restaurant.price} />
-                    {restaurant.categories.map((category) => {
-                        return <RestaurantTag title={category} />
-                    })}
+                    { (restaurant.categories) ?
+                        restaurant.categories.map((category) => {
+                            return <RestaurantTag title={category} />
+                        }): ""}
                 </Flex>
                 {/* <Box w="100%" h="25%" px="2%" overflowY="scroll">
                     <Text color="black" >{exampleRestaurantDescription}</Text>
@@ -93,7 +125,7 @@ function Restaurant() {
                     align="center"
                     >
                     {/* <Button variant="red" >Directions</Button> */}
-                    <Button size="lg" variant="red" >Add to Favorites</Button> 
+                    <Button size="lg" variant="red" onClick={handleAddToFavorites} >Add to Favorites</Button> 
                     <a 
                         href={restaurant.url} 
                         target="_blank" 

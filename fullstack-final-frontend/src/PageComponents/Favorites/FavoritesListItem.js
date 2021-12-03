@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Flex, Button } from "@chakra-ui/react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 function FavoritesListItem(props) {
-    const name = props.name;
-    const restaurantid = props.restaurantid;
+    const restaurantId = props.restaurantid;
     const location = useLocation();
+    let [searchParams] = useSearchParams();
+    const token = searchParams.get("token" || "");
+    const headers = {
+        'Content-Type': 'application/json',
+        'token': token
+        }
+    let [restaurantName, setRestaurantName] = useState("");
+
+    useEffect(() => {
+        axios.post("https://occasionally-final-project.herokuapp.com/occasion/getRestaurantDetails",
+        {id: restaurantId},
+        {
+            headers: headers
+        }) //CHANGE TO RESTAURANTID
+        .then(res => {
+        console.log(res);
+        setRestaurantName(res.data.name);
+        })
+        .catch((error => {
+            console.error(error);
+        }))
+    }, []);
 
     return (
-        <Link to={location.pathname + "?restaurantid=" + restaurantid}>
+        <Link to={location.pathname + "?restaurantid=" + restaurantId + "&token=" + token}>
             <Button 
                 bgColor="white"
                 color="black" 
@@ -19,7 +41,7 @@ function FavoritesListItem(props) {
                 _focus={{textDecoration: "underline", color: "white", bgColor: "black"}}
                 >
                 <Flex w="15vw" h="2.5rem" justify="center" align="center">   
-                        {name} #{restaurantid}
+                        {restaurantName}
                 </Flex>
             </Button>
         </Link>
