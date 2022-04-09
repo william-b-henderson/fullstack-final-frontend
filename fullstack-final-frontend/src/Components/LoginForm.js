@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Input, FormControl, Button, Text } from "@chakra-ui/react";
 import { Link, useNavigate } from 'react-router-dom';
 
+//require('dotenv').config();
+
 function LoginForm(props) {
     const variant = props.variant || "Login";
     let opposite;
@@ -36,9 +38,7 @@ function LoginForm(props) {
           }
 
         if (variant === "Login") {
-            const url = process.env.API_URL + "/user/login";
-            const login = "https://occasionally-final-project.herokuapp.com/user/login"
-            axios.post(login, payloadSignin, {
+            axios.post(`${process.env.REACT_APP_API_URL}/user/login`, payloadSignin, {
                 headers: headers
             })
                 .then(res => {
@@ -50,9 +50,8 @@ function LoginForm(props) {
                 });
         }
         else {
-            const url = process.env.API_URL + "/user/signup";
-            const signup = "https://occasionally-final-project.herokuapp.com/user/signup";
-            axios.post(signup, payloadSignup, {
+            console.log("about to post signup");
+            axios.post(`${process.env.REACT_APP_API_URL}/user/signup`, payloadSignup, {
                 headers: headers
             })
                 .then(res => {

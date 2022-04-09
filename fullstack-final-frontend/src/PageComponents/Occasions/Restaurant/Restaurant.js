@@ -14,6 +14,8 @@ import RestaurantTag from './RestaurantTag';
 import Rating from "./Rating";
 import axios from 'axios';
 
+//require('dotenv').config();
+
 function Restaurant() {
 
     let [searchParams] = useSearchParams();
@@ -44,7 +46,7 @@ function Restaurant() {
         }
 
     useEffect(() => {
-        axios.post("https://occasionally-final-project.herokuapp.com/occasion/getRestaurantDetails",
+        axios.post(`${process.env.REACT_APP_API_URL}/occasion/getRestaurantDetails`,
         {id: restaurantId},
         {
             headers: headers
@@ -61,7 +63,7 @@ function Restaurant() {
     console.log(restaurant);
 
     const handleAddToFavorites = () => {
-        axios.post("https://occasionally-final-project.herokuapp.com/occasion/addToFavorites",
+        axios.post(`${process.env.REACT_APP_API_URL}/occasion/addToFavorites`,
         {restaurant: restaurantId},
         {
             headers: headers

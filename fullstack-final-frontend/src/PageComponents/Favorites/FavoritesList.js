@@ -9,6 +9,8 @@ import FavoritesListItem from './FavoritesListItem';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
+//require('dotenv').config();
+
 function FavoritesList() {
 
     const defaultfavoritesList = [
@@ -106,7 +108,7 @@ function FavoritesList() {
         }
 
     useEffect(() => {
-        axios.post("https://occasionally-final-project.herokuapp.com/occasion/getFavoritesList",
+        axios.post(`${process.env.REACT_APP_API_URL}/occasion/getFavoritesList`,
         {}, 
         {
             headers: headers

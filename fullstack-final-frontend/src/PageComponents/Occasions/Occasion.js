@@ -7,7 +7,7 @@ import { Box,
 import { Link, useSearchParams } from 'react-router-dom';
 import OccasionIcon from '../../Components/OccasionIcon';
 
-
+//require('dotenv').config();
 
 function Occasion(props) {
     const title = props.title;
@@ -23,7 +23,7 @@ function Occasion(props) {
 
 
     useEffect(() => {
-        axios.post("https://occasionally-final-project.herokuapp.com/occasion/getRestaurantBasedOnOccasion",
+        axios.post(`${process.env.REACT_APP_API_URL}/occasion/getRestaurantBasedOnOccasion`,
         {occasion: occasion},
         {
             headers: headers

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Button } from "@chakra-ui/react";
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
+//require('dotenv').config();
+
 function NavBarButton(props) {
     const nav = props.to;
     const title = props.title;
@@ -18,7 +20,7 @@ function NavBarButton(props) {
         }
 
     useEffect(() => {
-        axios.post("https://occasionally-final-project.herokuapp.com/occasion/getFavoritesList",
+        axios.post(`${process.env.REACT_APP_API_URL}/occasion/getFavoritesList`,
         {}, 
         {
             headers: headers

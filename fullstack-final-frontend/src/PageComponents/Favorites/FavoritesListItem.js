@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Flex, Button } from "@chakra-ui/react";
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
+//require('dotenv').config();
+
 function FavoritesListItem(props) {
     const restaurantId = props.restaurantid;
     const location = useLocation();
@@ -15,7 +17,7 @@ function FavoritesListItem(props) {
     let [restaurantName, setRestaurantName] = useState("");
 
     useEffect(() => {
-        axios.post("https://occasionally-final-project.herokuapp.com/occasion/getRestaurantDetails",
+        axios.post(`${process.env.REACT_APP_API_URL}/occasion/getRestaurantDetails`,
         {id: restaurantId},
         {
             headers: headers

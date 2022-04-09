@@ -13,6 +13,8 @@ import Restaurant from '../../PageComponents/Occasions/Restaurant/Restaurant';
 import NavBar from '../../Components/NavBar';
 import RestaurantWrapper from '../../Components/RestaurantWrapper';
 
+//require('dotenv').config();
+
 function Restaurants() {
 
     let [searchParams] = useSearchParams();
@@ -30,7 +32,7 @@ function Restaurants() {
         }
 
     useEffect(() => {
-        axios.post("https://occasionally-final-project.herokuapp.com/occasion/getRestaurantBasedOnOccasion",
+        axios.post(`${process.env.REACT_APP_API_URL}/occasion/getRestaurantBasedOnOccasion`,
         {occasion: occasion},
         {
             headers: headers
